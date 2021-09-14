@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import models.DTO;
 import utils.DAO;
 
-@WebServlet("/show")
-public class ShowServlet extends HttpServlet {
-        private static final long serialVersionUID = 1L;
 
-    public ShowServlet() {
+@WebServlet("/edit")
+public class EditServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public EditServlet() {
         super();
     }
 
@@ -29,10 +30,14 @@ public class ShowServlet extends HttpServlet {
 
         em.close();
 
-        // タスクデータをリクエストスコープにセットしてshow.jspを呼び出す
+        // タスク情報とセッションIDをリクエストスコープに登録
         request.setAttribute("DTO", m);
+        request.setAttribute("_token", request.getSession().getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
+        // IDをセッションスコープに登録
+        request.getSession().setAttribute("DTO_id", m.getId());
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
     }
 }
