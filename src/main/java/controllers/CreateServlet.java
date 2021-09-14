@@ -13,23 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import models.DTO;
 import utils.DAO;
 
-/**
- * Servlet implementation class CreateServlet
- */
+
 @WebServlet("/create")
 public class CreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public CreateServlet() {
         super();
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String _token = request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())) {
